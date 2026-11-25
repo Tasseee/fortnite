@@ -81,6 +81,11 @@ const scene=new THREE.Scene();scene.background=new THREE.Color(0x80c8e8);scene.f
 const camera=new THREE.PerspectiveCamera(67,innerWidth/innerHeight,.1,420);
 camera.rotation.order='YXZ';
 scene.add(camera);
+
+scene.add(new THREE.HemisphereLight(0xdff7ff,0x3c594c,1.7));
+const sun=new THREE.DirectionalLight(0xfff1d3,2.35);sun.position.set(-60,90,42);sun.castShadow=true;sun.shadow.mapSize.set(1536,1536);sun.shadow.camera.left=-120;sun.shadow.camera.right=120;sun.shadow.camera.top=120;sun.shadow.camera.bottom=-120;scene.add(sun);
+const M=(c,r=.82,e={})=>new THREE.MeshStandardMaterial({color:c,roughness:r,...e});
+const mats={grass:M(0x62b66a),darkGrass:M(0x367f55),sand:M(0xd9c27b),snow:M(0xd8eef1),wood:M(0x93603d),leaf:M(0x338d56),leaf2:M(0x5ab45f),stone:M(0x82949b),gold:M(0xffd05a,.38,{emissive:0x794a00,emissiveIntensity:.25}),roof:M(0xb95743),water:M(0x267aa5,.22,{metalness:.12})};
 const fpRig=new THREE.Group();camera.add(fpRig);
 function addFirstPersonArms(){
  const sleeve=M(0x23619c),glove=M(0x243a55),skin=M(0xd8aa8d);
@@ -110,10 +115,6 @@ function makeWeapon(kind){
 const weapons={pulse:makeWeapon('pulse'),rapid:makeWeapon('rapid')};
 fpRig.add(weapons.pulse,weapons.rapid);weapons.rapid.visible=false;
 function syncWeapon(){weapons.pulse.visible=player.weapon===0;weapons.rapid.visible=player.weapon===1}
-scene.add(new THREE.HemisphereLight(0xdff7ff,0x3c594c,1.7));
-const sun=new THREE.DirectionalLight(0xfff1d3,2.35);sun.position.set(-60,90,42);sun.castShadow=true;sun.shadow.mapSize.set(1536,1536);sun.shadow.camera.left=-120;sun.shadow.camera.right=120;sun.shadow.camera.top=120;sun.shadow.camera.bottom=-120;scene.add(sun);
-const M=(c,r=.82,e={})=>new THREE.MeshStandardMaterial({color:c,roughness:r,...e});
-const mats={grass:M(0x62b66a),darkGrass:M(0x367f55),sand:M(0xd9c27b),snow:M(0xd8eef1),wood:M(0x93603d),leaf:M(0x338d56),leaf2:M(0x5ab45f),stone:M(0x82949b),gold:M(0xffd05a,.38,{emissive:0x794a00,emissiveIntensity:.25}),roof:M(0xb95743),water:M(0x267aa5,.22,{metalness:.12})};
 const sea=new THREE.Mesh(new THREE.PlaneGeometry(700,700),mats.water);sea.rotation.x=-Math.PI/2;sea.position.y=-7.4;scene.add(sea);
 const island=new THREE.Mesh(new THREE.CylinderGeometry(100,108,8,72),M(0x477c62));island.position.y=-3.9;island.receiveShadow=true;scene.add(island);
 const lawn=new THREE.Mesh(new THREE.CircleGeometry(97,72),mats.grass);lawn.rotation.x=-Math.PI/2;lawn.position.y=.1;lawn.receiveShadow=true;scene.add(lawn);
