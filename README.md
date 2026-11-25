@@ -1,30 +1,40 @@
 # Island Rush
 
-Ein kleines 3D-Browser-Battle-Spiel auf einer eigenen Insel – gebaut mit Three.js.
+Ein kleines 3D-First-Person-Inselspiel mit Bot-Tag, Sammelaufgaben und Bausystem. Es läuft direkt in einem modernen Browser.
 
-## Spiel starten
-Lade das Repository als ZIP herunter und entpacke es. Öffne anschließend `index.html` über einen lokalen Webserver, zum Beispiel mit der VS-Code-Erweiterung **Live Server**. Das Spiel lädt Three.js über ein CDN und benötigt deshalb eine Internetverbindung.
+## Starten
+1. Lade das Repository als ZIP herunter und entpacke es.
+2. Öffne `index.html` in Chrome, Edge oder Firefox.
+3. Das Spiel lädt Three.js aus einem CDN. Deshalb ist eine Internetverbindung erforderlich.
 
-## Online mit GitHub Pages veröffentlichen
-1. Öffne **Settings** im Repository.
-2. Gehe zu **Pages**.
-3. Unter **Build and deployment** wähle **Deploy from a branch**.
-4. Wähle Branch `main` und Ordner `/(root)`, dann **Save**.
-5. Öffne danach die von GitHub Pages angezeigte Spiel-URL.
+Die Datei verwendet einen klassischen Script-Import, damit sie auch beim Öffnen als lokale HTML-Datei geladen werden kann. Wenn dein Browser lokale Dateien einschränkt, starte sie über einen lokalen Webserver.
 
-## Steuerung (First Person)
-- **WASD**: vorwärts, rückwärts und seitwärts bewegen
-- **Maus rechts/links**: umsehen
-- **Maus hoch/runter**: nach oben/unten zielen (nicht invertiert)
-- **Linksklick**: Energie-Blaster abfeuern – Schüsse folgen dem Fadenkreuz
+## Steuerung am Computer
+- **W, A, S, D**: bewegen
+- **Maus**: umsehen
+- **Linksklick oder E**: nahen Bot abklatschen / Kiste öffnen / Loot einsammeln
 - **Leertaste**: springen
 - **Shift**: sprinten
-- **E**: Loot-Kiste öffnen oder Loot einsammeln
 - **C**: im Busch verstecken / Versteck verlassen
 - **B**: Bau-Modus
 - **1 / 2 / 3 / 4**: Wand / Rampe / Boden / Turm auswählen
-- **Q**: zwischen Blaster-Modi wechseln
 - **ESC**: Pause
 
-## Inhalt
-First-Person-Kamera, verbesserte Insel-Bereiche, detaillierte Trainings-Bots, Kisten-Loot mit Seltenheiten, geformte Power-ups, sichtbare Waffenmodelle, vier Bauteile, Minimap und schrumpfende Zone.
+Wenn der Maus-Fokus nicht verfügbar ist, halte die linke Maustaste gedrückt und ziehe die Maus zum Umsehen.
+
+## Steuerung auf Touch-Geräten
+- Linker Kreis: bewegen
+- Rechter Kreis: umsehen
+- **SPRUNG**: springen
+- **BAU**: Bau-Modus
+- **LOOT**: interagieren
+- **TAG**: nahen Bot abklatschen
+
+## Im Spiel
+- Insel mit Wald, Schneegebiet, Wüste, Stadt, Fluss, Brücke und Aussichtspunkten
+- 8 Bot-Rivalen, die patrouillieren und ausweichen
+- Loot-Kisten mit Energie, Schild, Baumaterial und Tempo-Boosts
+- Unterschiedlich geformte Sammelobjekte
+- Bau-System mit Wand, Rampe, Boden und Turm
+- Busch-Verstecke, Minimap und schrumpfende Zone
+- Bestleistung wird lokal im Browser gespeichert
