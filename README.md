@@ -1,40 +1,34 @@
 # Island Rush
 
-Ein kleines 3D-First-Person-Inselspiel mit Bot-Tag, Sammelaufgaben und Bausystem. Es läuft direkt in einem modernen Browser.
+Ein 3D-First-Person-Inselspiel mit Bot-Tag, Sammelaufgaben und Bausystem.
 
 ## Starten
-1. Lade das Repository als ZIP herunter und entpacke es.
-2. Öffne `index.html` in Chrome, Edge oder Firefox.
-3. Das Spiel lädt Three.js aus einem CDN. Deshalb ist eine Internetverbindung erforderlich.
+1. Repository als ZIP herunterladen und entpacken.
+2. `index.html` in Chrome, Edge oder Firefox öffnen.
+3. Für die 3D-Bibliothek wird eine Internetverbindung benötigt.
 
-Die Datei verwendet einen klassischen Script-Import, damit sie auch beim Öffnen als lokale HTML-Datei geladen werden kann. Wenn dein Browser lokale Dateien einschränkt, starte sie über einen lokalen Webserver.
+Falls der Browser lokale HTML-Dateien einschränkt, die Datei über einen lokalen Webserver starten. GitHub Pages kann das Projekt ebenfalls hosten.
 
-## Steuerung am Computer
+## Steuerung
 - **W, A, S, D**: bewegen
 - **Maus**: umsehen
-- **Linksklick oder E**: nahen Bot abklatschen / Kiste öffnen / Loot einsammeln
 - **Leertaste**: springen
 - **Shift**: sprinten
+- **Klick oder E**: nahen Bot abklatschen, Kiste öffnen oder Loot sammeln
 - **C**: im Busch verstecken / Versteck verlassen
 - **B**: Bau-Modus
-- **1 / 2 / 3 / 4**: Wand / Rampe / Boden / Turm auswählen
+- **1 / 2 / 3 / 4**: Wand / Rampe / Boden / Turm
 - **ESC**: Pause
 
-Wenn der Maus-Fokus nicht verfügbar ist, halte die linke Maustaste gedrückt und ziehe die Maus zum Umsehen.
+Wenn Pointer Lock nicht verfügbar ist, linke Maustaste gedrückt halten und Maus ziehen. Auf Touch-Geräten: linker Kreis zum Laufen, rechter Kreis zum Umsehen.
 
-## Steuerung auf Touch-Geräten
-- Linker Kreis: bewegen
-- Rechter Kreis: umsehen
-- **SPRUNG**: springen
-- **BAU**: Bau-Modus
-- **LOOT**: interagieren
-- **TAG**: nahen Bot abklatschen
-
-## Im Spiel
-- Insel mit Wald, Schneegebiet, Wüste, Stadt, Fluss, Brücke und Aussichtspunkten
-- 8 Bot-Rivalen, die patrouillieren und ausweichen
-- Loot-Kisten mit Energie, Schild, Baumaterial und Tempo-Boosts
-- Unterschiedlich geformte Sammelobjekte
-- Bau-System mit Wand, Rampe, Boden und Turm
-- Busch-Verstecke, Minimap und schrumpfende Zone
+## Spielinhalte
+- Höhenmodelliertes Inselgelände mit Wald, Schneegebiet, Wüste und Siedlung
+- Dynamische Wolken, Vögel, leichte Wasserwellen und Grasdetails
+- First-Person-Kamera mit Sprint-FOV und Laufbewegung
+- Animierte Bot-Rivalen mit Patrouillen- und Ausweichverhalten
+- Loot-Kisten, geformte Power-ups und Baumaterial
+- Vier Bauteile, Busch-Verstecke, Minimap und schrumpfende Zone
 - Bestleistung wird lokal im Browser gespeichert
+
+Das Spiel ist ein friedliches Tag- und Sammelspiel ohne Waffenmechanik.
