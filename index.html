@@ -42,11 +42,16 @@ h1{font-size:clamp(45px,9vw,83px);line-height:.88;letter-spacing:-.075em;margin:
 .touchBtns{display:grid;grid-template-columns:repeat(2,52px);gap:8px;pointer-events:auto}
 .touchBtns button{width:52px;height:45px;border-radius:12px;background:#07182dcc;border:1px solid #ffffff55;color:#fff;font-size:10px}
 #pause .panel,#result .panel{max-width:470px;text-align:center}#pause,#result{display:none}
+#bootError{display:none;position:fixed;inset:0;z-index:30;align-items:center;justify-content:center;padding:20px;background:#071326f5}
+#bootError .errorCard{max-width:520px;border:1px solid #ffcf6a66;border-radius:18px;padding:22px;background:#132b49;color:#fff;line-height:1.55}
+#hitmarker{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:24px;font-weight:900;color:#ffe58a;text-shadow:0 2px 8px #000;opacity:0;transition:opacity .08s}
+#touchAim{position:absolute;right:125px;bottom:0;width:96px;height:96px;border-radius:50%;border:1px solid #ffffff44;background:#07182d35;color:#ffffff99;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;letter-spacing:.1em;touch-action:none;pointer-events:auto}
 @media(max-width:650px){.menuGrid{grid-template-columns:1fr}.side{display:none}.panel{padding:21px}.features{gap:6px}.feature{padding:9px;font-size:10px}#top{top:7px;left:7px;right:7px}#logo{display:none}.stat{padding:7px;font-size:9px}#minimapWrap{top:57px;right:7px;width:112px;height:112px}#bars{left:8px;bottom:9px}#controls{display:none}#weapon{right:8px;bottom:100px}#zone{top:8px;font-size:9px}.touchBtns button{height:43px}}
 </style>
 </head>
 <body>
 <canvas id="game"></canvas>
+<div id="bootError"><div class="errorCard"><h2>Spiel konnte nicht geladen werden</h2><p>Die 3D-Bibliothek konnte nicht geladen werden. Prüfe deine Internetverbindung und lade die Seite neu. Starte die HTML-Datei in einem normalen Browser.</p></div></div>
 <div id="menu"><div class="panel">
  <div class="eyebrow">Season 01 · Mini Battle Island</div><h1>ISLAND <span>RUSH</span></h1>
  <p class="lead">Willkommen auf deiner Insel. Erkunde unterschiedliche Gebiete, knacke Loot-Kisten, sammle Ausrüstung und Baumaterial und tritt gegen clevere Trainings-Bots an. Baue dir deinen eigenen Vorteil!</p>
@@ -63,20 +68,20 @@ h1{font-size:clamp(45px,9vw,83px);line-height:.88;letter-spacing:-.075em;margin:
 <div id="hud">
  <div id="top"><div id="logo" class="glass">ISLAND <span>RUSH</span></div><div id="zone" class="glass">ZONE STABIL · ERKUNDE DIE INSEL</div><div id="stats"><div class="stat glass">✦ <b id="score">0</b></div><div class="stat glass">▣ <b id="wood">40</b></div><div class="stat glass">◈ <b id="alive">8</b></div><div class="stat glass">◷ <b id="timer">04:00</b></div></div></div>
  <div id="minimapWrap" class="glass"><div id="maplabel">ISLAND RADAR</div><canvas id="minimap" width="150" height="150"></canvas></div>
- <div id="cross"></div><div id="reticleHint">ENERGIE-PULS</div><div id="toast"></div><div id="prompt"></div>
+ <div id="cross"></div><div id="hitmarker">✕</div><div id="reticleHint">ENERGIE-PULS</div><div id="toast"></div><div id="prompt"></div>
  <div id="bars"><div class="barlabel">ENERGIE <span id="healthNum">100</span></div><div class="bar"><div id="healthFill" class="fill"></div></div><div class="barlabel">SCHILD <span id="shieldNum">50</span></div><div class="bar"><div id="shieldFill" class="fill"></div></div><div class="barlabel">INSel-RUHM <span id="xpNum">0</span></div><div class="bar"><div id="xpFill" class="fill"></div></div></div>
  <div id="weapon" class="glass"><span id="weaponMode">STANDARD</span><strong id="weaponName">PULSE BLASTER</strong><span id="ammo">∞ Energie</span></div>
  <div id="controls">WASD bewegen · Maus schauen · Klick: Blaster<br>Leertaste springen · Shift sprinten · E Loot<br>C verstecken · B bauen · 1–4 Teile wählen<br>Q Blaster-Modus · ESC Pause</div>
  <div id="buildPanel" class="glass">BAU-MODUS · 1 WAND · 2 RAMPE · 3 BODEN · 4 TURM · KLICK BAUEN · B ZURÜCK</div>
- <div id="touch"><div class="stick" id="joy"></div><div class="touchBtns"><button id="touchJump">SPRUNG</button><button id="touchBuild">BAU</button><button id="touchLoot">LOOT</button><button id="touchFire">PULS</button></div></div>
+ <div id="touch"><div class="stick" id="joy"></div><div id="touchAim">ZIELEN</div><div class="touchBtns"><button id="touchJump">SPRUNG</button><button id="touchBuild">BAU</button><button id="touchLoot">LOOT</button><button id="touchFire">PULS</button></div></div>
 </div>
 <div id="pause"><div class="panel"><div class="eyebrow">Match pausiert</div><h1>PAUSE</h1><p class="lead">Dein Insel-Abenteuer wartet.</p><button class="primary" id="resume">WEITERSPIELEN</button><button class="primary" id="quit" style="background:linear-gradient(90deg,#ffc1a5,#ffdf8d)">ZUR LOBBY</button></div></div>
 <div id="result"><div class="panel"><div class="eyebrow">Match abgeschlossen</div><h1 id="resultTitle">GUT GESPIELT!</h1><p class="lead" id="resultText"></p><div class="feature" id="bestLine"></div><button class="primary" id="replay">NOCH EINE RUNDE ↻</button><button class="primary" id="backLobby" style="background:#ffffff17;color:#fff">ZUR LOBBY</button></div></div>
-<script type="module">
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js';
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r149/three.min.js" onerror="document.getElementById('bootError').style.display='flex'"></script><script>
+if(!window.THREE){const e=document.getElementById('bootError');if(e)e.style.display='flex';throw new Error('Three.js konnte nicht geladen werden.');}const THREE=window.THREE;
 const $=id=>document.getElementById(id);
 const renderer=new THREE.WebGLRenderer({canvas:$('game'),antialias:true});
-renderer.setPixelRatio(Math.min(devicePixelRatio,1.8));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;
+renderer.setPixelRatio(Math.min(devicePixelRatio,1.8));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputEncoding=THREE.sRGBEncoding;
 const scene=new THREE.Scene();scene.background=new THREE.Color(0x80c8e8);scene.fog=new THREE.Fog(0x80c8e8,110,230);
 const camera=new THREE.PerspectiveCamera(67,innerWidth/innerHeight,.1,420);
 camera.rotation.order='YXZ';
