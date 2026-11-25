@@ -223,11 +223,11 @@ function arch(x,z){const g=groupAt(x,z);box(1,6,1,mats.wood,-3,3,0,g);box(1,6,1,
 for(let i=0;i<55;i++){const a=Math.random()*Math.PI*2,r=22+Math.random()*68,x=Math.cos(a)*r,z=Math.sin(a)*r;if(Math.abs(x)<14&&Math.abs(z)<14)continue;if(x>35&&z>20)continue;if(x<-42&&z< -25)continue;tree(x,z,.65+Math.random()*.7)}
 for(let i=0;i<24;i++){const a=Math.random()*Math.PI*2,r=15+Math.random()*73;rock(Math.cos(a)*r,Math.sin(a)*r,.5+Math.random()*.8)}
 // Snowy highlands
-const snowHill=new THREE.Mesh(new THREE.ConeGeometry(28,22,8),M(0xa5c7c8));snowHill.position.set(-58,10,-48);snowHill.castShadow=true;scene.add(snowHill);
-const snowCap=new THREE.Mesh(new THREE.ConeGeometry(18,9,8),mats.snow);snowCap.position.set(-58,21,-48);scene.add(snowCap);
+const snowHill=new THREE.Mesh(new THREE.ConeGeometry(28,22,8),M(0xa5c7c8));snowHill.position.set(-58,10+terrainHeight(-58,-48),-48);snowHill.castShadow=true;scene.add(snowHill);
+const snowCap=new THREE.Mesh(new THREE.ConeGeometry(18,9,8),mats.snow);snowCap.position.set(-58,21+terrainHeight(-58,-48),-48);scene.add(snowCap);
 for(let i=0;i<16;i++){const x=-80+Math.random()*42,z=-74+Math.random()*50;pine(x,z,.7+Math.random()*.55)}
 // Desert corner
-const desert=new THREE.Mesh(new THREE.CircleGeometry(27,40),mats.sand);desert.rotation.x=-Math.PI/2;desert.position.set(58,.12,54);scene.add(desert);
+const desert=new THREE.Mesh(new THREE.CircleGeometry(27,40),mats.sand);desert.rotation.x=-Math.PI/2;desert.position.set(58,.12+terrainHeight(58,54),54);scene.add(desert);
 for(let i=0;i<9;i++)palm(43+Math.random()*31,38+Math.random()*32,.75+Math.random()*.5);
 // Town and points of interest
 house(-24,-15,1);house(24,20,.92);house(43,-12,.82);house(-5,42,.76,M(0x557f9e));house(55,18,.8,mats.gold);
@@ -235,9 +235,9 @@ tower(-4,-39);tower(48,-42);tower(-56,34);arch(0,15);
 bush(-14,-2,1.1);bush(15,-25,1.1);bush(36,8,1);bush(-39,20,1.1);bush(2,52,1.15);bush(60,-27,.95);
 for(let i=0;i<5;i++){const a=i*Math.PI*2/5;const x=Math.cos(a)*16,z=Math.sin(a)*16;box(5,1,1.1,M(0x9b7049),x,.5,z)}
 // Lobby plaza at island entrance
-const lobby=new THREE.Mesh(new THREE.CylinderGeometry(13,13,1,40),M(0x347aa3));lobby.position.set(-48,.62,-48);lobby.receiveShadow=true;scene.add(lobby);
-const lobbyHalo=new THREE.Mesh(new THREE.TorusGeometry(11,.2,8,64),new THREE.MeshBasicMaterial({color:0x5eeaff}));lobbyHalo.rotation.x=Math.PI/2;lobbyHalo.position.set(-48,1.15,-48);scene.add(lobbyHalo);
-box(5,5,1,M(0x19486a),-48,3,-59);box(7,.45,.45,mats.gold,-48,5.8,-59);
+const lobby=new THREE.Mesh(new THREE.CylinderGeometry(13,13,1,40),M(0x347aa3));lobby.position.set(-48,.62+terrainHeight(-48,-48),-48);lobby.receiveShadow=true;scene.add(lobby);
+const lobbyHalo=new THREE.Mesh(new THREE.TorusGeometry(11,.2,8,64),new THREE.MeshBasicMaterial({color:0x5eeaff}));lobbyHalo.rotation.x=Math.PI/2;lobbyHalo.position.set(-48,1.15+terrainHeight(-48,-48),-48);scene.add(lobbyHalo);
+box(5,5,1,M(0x19486a),-48,3+terrainHeight(-48,-59),-59);box(7,.45,.45,mats.gold,-48,5.8+terrainHeight(-48,-59),-59);
 for(let i=0;i<4;i++){const p=new THREE.PointLight(i%2?0x5feaff:0xffd36b,1.3,14);p.position.set(-48+Math.cos(i*Math.PI/2)*9,3,-48+Math.sin(i*Math.PI/2)*9);scene.add(p)}
 // Wege, Fluss und weitere markante Insel-Orte
 function pathTile(w,d,x,z,rot=0,color=0xb99b68){const p=new THREE.Mesh(new THREE.BoxGeometry(w,.12,d),M(color));p.position.set(x,.13,z);p.rotation.y=rot;p.receiveShadow=true;scene.add(p)}
